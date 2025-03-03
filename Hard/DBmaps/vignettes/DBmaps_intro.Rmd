@@ -1,0 +1,54 @@
+---
+title: "Introduction to DBmaps"
+author: "Akshat Maurya"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to DBmaps}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+The `DBmaps` package provides tools for exploring, mapping, and merging tables in relational databases. It simplifies the process of understanding database structures, identifying relationships between tables, and automating the merging of data from multiple tables. This vignette demonstrates the core functionality of the package, including creating a database map and performing multi-table merges.
+
+## Installation
+
+To install the `DBmaps` package, use the following command:
+
+```{r, eval=FALSE}
+devtools::install_github("yourusername/DBmaps")
+
+library(DBmaps)
+library(data.table)
+
+# Sample tables
+tables <- list(
+  students = data.table(id = c("A", "B", "C"), name = c("Alice", "Bob", "Charlie")),
+  scores = data.table(id = c("A", "B", "D"), score = c(90, 85, 88))
+)
+
+# Create a database map
+db_map <- create.DB.map(tables)
+print(db_map)
+
+
+
+
+# Create sample tables
+table1 <- data.table(id = c(1, 2, 3), name = c("Alice", "Bob", "Charlie"))
+table2 <- data.table(id = c(1, 2, 4), score = c(90, 85, 88))
+table3 <- data.table(id = c(1, 3, 4), age = c(20, 22, 21))
+
+# Define linking variables and join types
+by <- list(c("id"), c("id"))
+join_types <- c("left", "inner")
+
+# Perform multi-merge
+result <- multi.merge(tables = list(table1, table2, table3), by = by, join_types = join_types)
+print(result)
+
+
+   id    name score age
+1:  1   Alice    90  20
+2:  2     Bob    85  NA
