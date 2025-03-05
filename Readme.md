@@ -34,7 +34,6 @@ The medium section introduces a more advanced `merges()` function that provides 
 - Automatically detects common columns for merging
 - Allows manual specification of merge columns
 - Supports merging three tables in a single operation
-- Includes robust error handling for various merge scenarios
 
 ### Merge Strategies Demonstrated
 1. Auto-detect common columns
