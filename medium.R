@@ -66,8 +66,8 @@ merges <- function(t1, t2, t3, by1_2 = NULL, by2_3 = NULL) {
 
 # Example data 
 table1 <- data.table( Training = c("Strength", "Stamina", "Other"), Pulse = c(100, 150, 120), Duration = c(60, 30, 45) )
-table2 <- data.table( Training = c("Stamina", "Other"), Calories = c(300, 400) )
-table3 <- data.table( Training = c("Strength", "Stamina", "Other"), Steps = c(3000, 6000, 2000) )
+table2 <- data.table( Training = c("Stamina", "Other"), Calories = c(100, 120) )
+table3 <- data.table( Training = c("Strength", "Stamina", "Other"), Steps = c(3000, 120, 2000) )
 
 # Auto-detect common columns for both merges
 result1 <- merges(table1, table2, table3)
@@ -76,7 +76,7 @@ result1
 result2 <- merges(table1, table2, table3, by1_2 = "Training")
 result2
 # Specify different columns for first merge
-result3 <- merges(table1, table2, table3, by1_2 = list("Training", "Training"))
+result3 <- merges(table1, table2, table3, by1_2 = list("Pulse", "Calories"),by2_3 =list("Pulse","Steps"))
 result3
 # Specify columns for both merges
 result4 <- merges(table1, table2, table3, by1_2 = "Training", by2_3 = "Training")
